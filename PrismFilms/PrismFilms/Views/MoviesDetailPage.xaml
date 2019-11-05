@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrismFilms.Views.MoviesDetailPage"
+             xmlns:local="clr-namespace:PrismFilms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             Title="{Binding Title}">
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.8*" />
+            </Grid.RowDefinitions>
+            <ffimageloading:CachedImage
+                    Grid.Row="0"
+                    Margin="5"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+			        WidthRequest="150"
+                    HeightRequest="150"
+			        DownsampleToViewSize="true"
+			        Source="{Binding UpComingMovies.image}">
+                <ffimageloading:CachedImage.Transformations>
+				    <fftransformations:CircleTransformation />
+			    </ffimageloading:CachedImage.Transformations>
+		    </ffimageloading:CachedImage>
+            <StackLayout Grid.Row="1">
+                <Label Text="{Binding UpComingMovies.title}" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20">
+                    <Label.Effects>
+                        <local:ShadowEffect Radius="5" DistanceX="5" DistanceY="5">
+					        <local:ShadowEffect.Color>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="iOS" Value="Black" />
+                                    <On Platform="Android" Value="Black" />
+                                    <On Platform="UWP" Value="Red" />
+                                </OnPlatform>
+					        </local:ShadowEffect.Color>
+				        </local:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+                <Label Text="{Binding UpComingMovies.rating}" TextColor="Black" FontSize="15" />
+                <Label Text="{Binding UpComingMovies.releaseYear}" TextColor="Black" LineBreakMode="WordWrap" />
+                <Button x:Name="speakButton" Command="{Binding SpeakCommand}" HorizontalOptions="Center" WidthRequest="150" Text="Speak" TextColor="Black" BackgroundColor="LightGray" />                   
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>
